@@ -127,3 +127,12 @@ def test_cli_tooling_notes_rejected(capsys) -> None:
     err = capsys.readouterr().err
     assert code == 1
     assert "civic" in err.lower() or "tooling" in err.lower() or "notes" in err.lower()
+
+
+def test_help_lists_ui_and_version() -> None:
+    from glossafilter.cli import _build_parser
+
+    text = _build_parser().format_help()
+    assert "ui" in text
+    assert "version" in text
+    assert "127.0.0.1:8792" in text or "glossafilter ui" in text

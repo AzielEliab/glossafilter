@@ -32,7 +32,8 @@ def _build_parser() -> argparse.ArgumentParser:
         description=(
             "Glossa Filter — deterministic linguistic mediation layer "
             "(Aziel Eliab, 2026). Peer renders, not a translator. "
-            "Human opinion remains human, and tools remain tools."
+            "Human opinion remains human, and tools remain tools. "
+            "Local UI: `glossafilter ui` at http://127.0.0.1:8792."
         ),
     )
     sub = parser.add_subparsers(dest="cmd", required=True)

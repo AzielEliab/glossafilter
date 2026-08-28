@@ -19,6 +19,19 @@ How to contribute: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 **Forks are welcome and always allowed.**
 
+## Quick start
+
+```bash
+python -m venv .venv && source .venv/bin/activate && pip install -e ".[dev]"
+glossafilter ui
+```
+
+Open http://127.0.0.1:8792 (loopback only). No CDN, no telemetry.
+
+Counted download: [https://glossafilter-download-tracker.vibelock.workers.dev/](https://glossafilter-download-tracker.vibelock.workers.dev/)
+
+
+
 This tree is a standalone product; not ForgeReceipts / ZionPattern /
 DecisionGATE / AZ-OS.
 
@@ -106,6 +119,22 @@ proposition fields, optional extra propositions, peer checkboxes (all
 selected by default, none labeled primary). Vertical equal stack of peer
 outputs. JSON export of digest + audit + peers. Self-contained CSS, no
 CDN, no phone-home. Motto on the page.
+
+
+## iPhone & Android
+
+Flutter sources: [`mobile/`](mobile/). Application id `com.azieeliab.glossafilter`. Offline. No analytics. Dark matte / gold.
+
+Structured intent → peer renders (en-plain, en-formal, es). No canonical language. Mediation, not concealment.
+
+```bash
+cd mobile
+flutter create --org com.azieeliab --project-name glossafilter .
+flutter pub get
+flutter run
+```
+
+The `android/` and `ios/` folders in this tree are skeleton READMEs until you run `flutter create .` (this machine has no Flutter SDK on PATH). Then open `android/` in Android Studio or `ios/Runner.xcworkspace` in Xcode. Not a store listing.
 
 ## Tests
 
