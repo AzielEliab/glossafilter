@@ -1,0 +1,28 @@
+{
+  "peer_id": "es",
+  "label": "Español",
+  "templates": {
+    "proposition": "{subject} {rel} {object}.",
+    "blurb": "{action} {interface}."
+  },
+  "glossary": {
+    "package": "paquete",
+    "release": "publica",
+    "filter": "filtro",
+    "tool": "herramienta",
+    "interface": "interfaz",
+    "behavior": "comportamiento",
+    "binds": "enlaza",
+    "bind": "enlaza",
+    "channel": "canal",
+    "loopback": "bucle local",
+    "speech": "habla",
+    "remains": "permanece",
+    "human": "humana",
+    "tools": "herramientas"
+  },
+  "register_variants": {
+    "release": ["publica", "emite", "expide"],
+    "binds": ["enlaza", "vincula", "asocia"]
+  }
+}

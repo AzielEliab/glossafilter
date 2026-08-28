@@ -1,0 +1,28 @@
+{
+  "peer_id": "fr",
+  "label": "Français",
+  "templates": {
+    "proposition": "{subject} {rel} {object}.",
+    "blurb": "{action} {interface}."
+  },
+  "glossary": {
+    "package": "paquet",
+    "release": "publie",
+    "filter": "filtre",
+    "tool": "outil",
+    "interface": "interface",
+    "behavior": "comportement",
+    "binds": "lie",
+    "bind": "lie",
+    "channel": "canal",
+    "loopback": "boucle locale",
+    "speech": "parole",
+    "remains": "demeure",
+    "human": "humaine",
+    "tools": "outils"
+  },
+  "register_variants": {
+    "release": ["publie", "émet", "diffuse"],
+    "binds": ["lie", "associe", "relie"]
+  }
+}

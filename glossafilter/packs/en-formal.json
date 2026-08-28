@@ -1,0 +1,28 @@
+{
+  "peer_id": "en-formal",
+  "label": "English (formal)",
+  "templates": {
+    "proposition": "{subject} {rel} {object}.",
+    "blurb": "{action} {interface}."
+  },
+  "glossary": {
+    "package": "package",
+    "release": "issues",
+    "filter": "filter",
+    "tool": "instrument",
+    "interface": "interface",
+    "behavior": "specified behavior",
+    "binds": "attaches",
+    "bind": "attaches",
+    "channel": "channel",
+    "loopback": "loopback interface",
+    "speech": "speech",
+    "remains": "remains",
+    "human": "human",
+    "tools": "instruments"
+  },
+  "register_variants": {
+    "release": ["issues", "disseminates", "promulgates"],
+    "binds": ["attaches", "associates", "connects"]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "peer_id": "ht",
+  "label": "Kreyòl Ayisyen",
+  "templates": {
+    "proposition": "{subject} {rel} {object}.",
+    "blurb": "{action} {interface}."
+  },
+  "glossary": {
+    "package": "pake",
+    "release": "lage",
+    "filter": "filtè",
+    "tool": "zouti",
+    "interface": "entèfas",
+    "behavior": "konpòtman",
+    "binds": "mare",
+    "bind": "mare",
+    "channel": "kanal",
+    "loopback": "loopback",
+    "speech": "pawòl",
+    "remains": "rete",
+    "human": "moun",
+    "tools": "zouti"
+  },
+  "register_variants": {
+    "release": ["lage", "voye", "pibliye"]
+  }
+}

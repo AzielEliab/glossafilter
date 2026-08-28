@@ -1,0 +1,28 @@
+{
+  "peer_id": "en-plain",
+  "label": "English (plain)",
+  "templates": {
+    "proposition": "{subject} {rel} {object}.",
+    "blurb": "{action} {interface}."
+  },
+  "glossary": {
+    "package": "package",
+    "release": "ships",
+    "filter": "filter",
+    "tool": "tool",
+    "interface": "interface",
+    "behavior": "behavior",
+    "binds": "binds",
+    "bind": "binds",
+    "channel": "channel",
+    "loopback": "loopback",
+    "speech": "speech",
+    "remains": "stays",
+    "human": "human",
+    "tools": "tools"
+  },
+  "register_variants": {
+    "release": ["ships", "puts out", "sends out"],
+    "binds": ["binds", "hooks to", "listens on"]
+  }
+}

@@ -1,0 +1,235 @@
+/* Glossa Filter local UI. No CDN. Mediation, not a translator. */
+:root {
+  --bg: #0f1419;
+  --panel: #171e27;
+  --ink: #e8edf2;
+  --muted: #8b97a6;
+  --line: #2a3544;
+  --pass: #3dba7a;
+  --pass-dim: #1d4a33;
+  --idle: #3d4a58;
+  --gold: #d4bc6a;
+  --focus: #7aa2d4;
+  font-synthesis: none;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Source Serif 4", "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+  line-height: 1.45;
+}
+body {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2.1rem 1.2rem 4rem;
+}
+.tag {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1 {
+  font-size: 2rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  margin: 0.35rem 0 0.25rem;
+}
+.motto {
+  color: var(--gold);
+  font-style: italic;
+  margin: 0 0 0.85rem;
+  font-size: 1.05rem;
+}
+.lede {
+  color: var(--muted);
+  margin: 0 0 1.5rem;
+  max-width: 40rem;
+}
+fieldset {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  padding: 1.1rem 1.15rem 1.2rem;
+  margin: 0 0 1rem;
+}
+legend {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 0.4rem;
+}
+label {
+  display: block;
+  font-size: 0.92rem;
+  margin: 0.85rem 0 0.3rem;
+}
+label .kicker {
+  display: block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.12rem;
+}
+.hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 0.6rem;
+}
+textarea, input[type="text"], select {
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #10161d;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.98rem;
+}
+textarea:focus, input[type="text"]:focus, select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+.triple {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.55rem;
+}
+.triple-labels {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.55rem;
+  margin-top: 0.2rem;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+@media (max-width: 640px) {
+  .triple, .triple-labels, .pair { grid-template-columns: 1fr; }
+}
+.peers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+}
+.peers label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+}
+.peers input { width: auto; }
+.actions {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin: 0 0 1.6rem;
+}
+button {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+  cursor: pointer;
+  font-weight: 650;
+}
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+button#export {
+  background: transparent;
+  color: var(--ink);
+}
+h2 {
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 0 0 0.7rem;
+}
+#peer-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.peer-card {
+  display: grid;
+  grid-template-columns: 1.15rem 1fr;
+  gap: 0.85rem;
+  border: 1px solid var(--pass);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  background: var(--pass-dim);
+}
+.lamp {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  margin-top: 0.35rem;
+  background: var(--pass);
+  box-shadow: 0 0 0 3px #0f2a1c;
+}
+.peer-card .title {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pass);
+  font-weight: 650;
+}
+.peer-card .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0.1rem 0 0.4rem;
+}
+.peer-card .text {
+  margin: 0;
+  white-space: pre-wrap;
+  color: var(--ink);
+  font-size: 1.02rem;
+}
+.peer-card.error {
+  border-color: #d4534b;
+  background: #5a221f;
+}
+.ethics {
+  margin-top: 1.6rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  background: var(--panel);
+}
+.ethics ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+}
+footer {
+  margin-top: 2rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.foot-note { font-style: italic; }

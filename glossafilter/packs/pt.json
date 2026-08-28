@@ -1,0 +1,28 @@
+{
+  "peer_id": "pt",
+  "label": "Português",
+  "templates": {
+    "proposition": "{subject} {rel} {object}.",
+    "blurb": "{action} {interface}."
+  },
+  "glossary": {
+    "package": "pacote",
+    "release": "publica",
+    "filter": "filtro",
+    "tool": "ferramenta",
+    "interface": "interface",
+    "behavior": "comportamento",
+    "binds": "vincula",
+    "bind": "vincula",
+    "channel": "canal",
+    "loopback": "loopback",
+    "speech": "fala",
+    "remains": "permanece",
+    "human": "humana",
+    "tools": "ferramentas"
+  },
+  "register_variants": {
+    "release": ["publica", "emite", "divulga"],
+    "binds": ["vincula", "liga", "associa"]
+  }
+}

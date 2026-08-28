@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glossafilter"
+version = "0.1.0"
+description = "Glossa Filter: a deterministic linguistic mediation layer. Peer renders, not a translator. Not concealment."
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [{name = "Aziel Eliab"}]
+requires-python = ">=3.10"
+keywords = [
+    "linguistics",
+    "mediation",
+    "static-ip",
+    "peers",
+    "dialect",
+    "glossa",
+    "deterministic",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Text Processing :: Linguistic",
+    "Intended Audience :: Developers",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+glossafilter = "glossafilter.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/AzielEliab/glossafilter"
+Download = "https://github.com/AzielEliab/glossafilter/releases"
+Issues = "https://github.com/AzielEliab/glossafilter/issues"
+Counted-downloads = "https://glossafilter-download-tracker.vibelock.workers.dev/"
+
+[tool.setuptools.packages.find]
+include = ["glossafilter*"]
+
+[tool.setuptools.package-data]
+glossafilter = ["packs/*.json", "web/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
