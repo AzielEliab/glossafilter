@@ -151,6 +151,17 @@ Isolated download counter for this project only.
 See [workers/download-tracker/README.md](workers/download-tracker/README.md).
 Do not deploy wrangler from this tree; parent ships.
 
+## Layout
+
+```
+glossafilter/       library (intent, packs, engine, cli, ui)
+glossafilter/packs/ bundled peer packs (all equal)
+tests/              pytest
+docs/whitepaper.md  spec
+mobile/             Flutter iPhone + Android (`flutter create .`)
+workers/download-tracker/   Cloudflare Worker
+```
+
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE).
