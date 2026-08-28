@@ -11,4 +11,4 @@ id = "4dca63572f354a3c9c60b354d1acc330"
 [assets]
 directory = "./public"
 binding = "ASSETS"
-run_worker_first = ["/", "/download", "/download/*", "/stats", "/event", "/go"]
+run_worker_first = ["/", "/download", "/download/*", "/stats", "/event", "/go", "/v1", "/v1/*", "/openapi.json", "/ai"]

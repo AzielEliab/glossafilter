@@ -162,6 +162,33 @@ mobile/             Flutter iPhone + Android (`flutter create .`)
 workers/download-tracker/   Cloudflare Worker
 ```
 
+## Use with Grok, ChatGPT, Venice
+
+Live HTTPS runtime on the existing download-tracker Worker. Mediation, not concealment. No live translator APIs.
+
+OpenAPI (ChatGPT GPT Actions / Venice custom HTTP / Grok custom tool):
+
+```
+https://glossafilter-download-tracker.vibelock.workers.dev/openapi.json
+```
+
+Setup notes: [https://glossafilter-download-tracker.vibelock.workers.dev/ai](https://glossafilter-download-tracker.vibelock.workers.dev/ai)
+
+MCP catalog (ships separately): `https://aziel-runtime.vibelock.workers.dev/mcp`
+
+```bash
+curl -sS -X POST https://glossafilter-download-tracker.vibelock.workers.dev/v1/render \
+  -H "content-type: application/json" \
+  -d '{
+    "channel": "tooling",
+    "subject": "package",
+    "rel": "release",
+    "object": "filter",
+    "action": "binds",
+    "interface": "loopback"
+  }'
+```
+
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE).
