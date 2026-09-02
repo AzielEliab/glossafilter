@@ -6,6 +6,8 @@ const PRODUCT = "glossafilter";
 const VERSION = "0.1.0";
 const MOTTO = "Human opinion remains human, and tools remain tools.";
 const HOST = "https://glossafilter-download-tracker.vibelock.workers.dev";
+const SKILL = "---\nname: Glossa Filter\ndescription: Use when rendering the same intent into multiple language/dialect peers. Mediation, not concealment. No live translator APIs. Hosted /v1 via this Worker or aziel-runtime. Author Aziel Eliab.\n---\n\n# Glossa Filter\n\nHuman opinion remains human, and tools remain tools.\n\nAuthor: **Aziel Eliab**.\n\nUse when rendering the same intent into multiple language/dialect peers. Mediation, not concealment. No live translator APIs.\n\nAlways send `User-Agent: Mozilla/5.0`. Cloudflare Workers may 403 an empty agent.\n\n## Endpoints (this Worker)\n\nHost: `https://glossafilter-download-tracker.vibelock.workers.dev`\n\n| Method | Path | What |\n|--------|------|------|\n| GET | `/v1/health` | Liveness. Does not increment downloads. |\n| GET | `/v1/skill` | This markdown. Does not increment downloads. |\n| GET | `/v1/peers` | List peer language packs. |\n| POST | `/v1/render` | Render intent into peer phrasings. No live translator APIs. |\n\nOpenAPI: `https://glossafilter-download-tracker.vibelock.workers.dev/openapi.json`\n\nCatalog OpenAPI: `https://aziel-runtime.vibelock.workers.dev/openapi.json`\n\nMCP: `POST https://aziel-runtime.vibelock.workers.dev/mcp`\n\nCatalog aliases under `/p/glossafilter/\u2026`.\n\n## How to call (Mozilla/5.0)\n\n```bash\ncurl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/health\ncurl -s -A 'Mozilla/5.0' -X POST https://glossafilter-download-tracker.vibelock.workers.dev/v1/render \\\n  -H 'content-type: application/json' \\\n  -d '{\"channel\":\"tooling\",\"intent\":{\"what\":\"release\",\"action\":\"publish\"}}'\ncurl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/skill\n```\n\nGrok: import the catalog OpenAPI as a custom tool. ChatGPT: GPT Actions. Venice: HTTP tools.\n\n## Local (after one-click install)\n\n```bash\ncurl -fsSL https://glossafilter-download-tracker.vibelock.workers.dev/install.sh | bash\nglossafilter ui\n```\n\nThen open http://127.0.0.1:8792 (this computer only).\n\n## Honest banner\n\nTHIS IS: deterministic linguistic mediation into peer renders. THIS IS NOT: concealment, a live translator API, authorship stamping, or a canonical phrasing. Author Aziel Eliab.\n\nApache-2.0 (or the repo LICENSE). Forks are welcome and always allowed.\n";
+
 const CHANNELS = new Set(["tooling", "civic"]);
 const SLOT_KEYS = ["who", "what", "when", "action", "constraint", "interface"];
 const IDENTITY_FIELDS = new Set(["author","github","real_name","realname","real-name","identity","full_name","fullname","twitter","email"]);
@@ -576,7 +578,15 @@ function openapiSpec() {
     },
     servers: [{ url: HOST }],
     paths: {
-      "/v1/health": {
+      
+      "/v1/skill": {
+        get: {
+          operationId: "glossafilter_skill",
+          summary: "Return skill markdown. Does not increment download KV.",
+          responses: { "200": { description: "markdown" } },
+        },
+      },
+"/v1/health": {
         get: { operationId: "health", summary: "Liveness", responses: { "200": { description: "ok", content: { "application/json": { schema: { type: "object" } } } } } },
       },
       "/v1/peers": {
@@ -633,6 +643,12 @@ export async function handleRuntimeApi(request, url) {
     if (path === "/v1/health" && request.method === "GET") {
       return json({ ok: true, product: PRODUCT, version: VERSION });
     }
+    if (path === "/v1/skill" && request.method === "GET") {
+      return new Response(SKILL, {
+      status: 200,
+      headers: { "Content-Type": "text/markdown; charset=utf-8", "Cache-Control": "private, no-store", ...corsHeaders() },
+      });
+  }
     if (path === "/openapi.json" && request.method === "GET") return json(openapiSpec());
     if (path === "/ai" && request.method === "GET") {
       return new Response(aiHtml(), { headers: { "Content-Type": "text/html; charset=utf-8", ...corsHeaders() } });

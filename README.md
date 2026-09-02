@@ -26,6 +26,34 @@ python -m venv .venv && source .venv/bin/activate && pip install -e ".[dev]"
 glossafilter ui
 ```
 
+
+## One-click install
+
+```bash
+curl -fsSL https://glossafilter-download-tracker.vibelock.workers.dev/install.sh | bash
+```
+
+The script curls the **counted** tarball from this project's Worker
+(`/download`, User-Agent `Mozilla/5.0`), extracts, makes a venv, and
+`pip install -e .`. Then run `glossafilter ui`.
+
+Or tap **Download** / **One-click install** on the Worker homepage:
+https://glossafilter-download-tracker.vibelock.workers.dev/
+
+## Counted download (Cloudflare Worker)
+
+**This is the counted download.** GitHub releases exist as a mirror.
+The Worker serves the gzip itself (HTTP 200, no 302 to GitHub).
+
+- Homepage: [https://glossafilter-download-tracker.vibelock.workers.dev/](https://glossafilter-download-tracker.vibelock.workers.dev/)
+- Direct tarball: [glossafilter-0.1.0.tar.gz](https://glossafilter-download-tracker.vibelock.workers.dev/download?asset=glossafilter-0.1.0.tar.gz)
+- One-click install: [https://glossafilter-download-tracker.vibelock.workers.dev/install.sh](https://glossafilter-download-tracker.vibelock.workers.dev/install.sh)
+- Skill: [https://glossafilter-download-tracker.vibelock.workers.dev/v1/skill](https://glossafilter-download-tracker.vibelock.workers.dev/v1/skill)
+- OpenAPI: [https://glossafilter-download-tracker.vibelock.workers.dev/openapi.json](https://glossafilter-download-tracker.vibelock.workers.dev/openapi.json)
+- GitHub: [https://github.com/AzielEliab/glossafilter](https://github.com/AzielEliab/glossafilter)
+
+Isolated counter: Worker `glossafilter-download-tracker`, KV `GLOSSAFILTER_DOWNLOADS`. `/v1` does not increment downloads.
+
 Open http://127.0.0.1:8792 (loopback only). No CDN, no telemetry.
 
 Counted download: [https://glossafilter-download-tracker.vibelock.workers.dev/](https://glossafilter-download-tracker.vibelock.workers.dev/)

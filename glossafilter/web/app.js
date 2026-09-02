@@ -146,4 +146,35 @@
     a.click();
     URL.revokeObjectURL(a.href);
   });
+
+  const importEl = document.getElementById("import-json");
+  if (importEl) importEl.addEventListener("change", function () {
+    const f = importEl.files && importEl.files[0];
+    if (!f) return;
+    const reader = new FileReader();
+    reader.onload = function () {
+      let obj;
+      try { obj = JSON.parse(String(reader.result || "{}")); } catch (e) { return; }
+      const intent = obj.intent || obj;
+      if (intent.channel) channelEl.value = intent.channel;
+      const props = intent.propositions || [];
+      if (props[0]) {
+        document.getElementById("subject").value = props[0].subject || "";
+        document.getElementById("rel").value = props[0].rel || "";
+        document.getElementById("object").value = props[0].object || "";
+      }
+      if (props.length > 1) {
+        document.getElementById("extra").value = props.slice(1).map(function (p) {
+          return [p.subject || "", p.rel || "", p.object || ""].join(" | ");
+        }).join("\n");
+      }
+      const slots = intent.slots || {};
+      if (slots.action) document.getElementById("action").value = slots.action;
+      if (slots.interface) document.getElementById("interface").value = slots.interface;
+      if (intent.notes) document.getElementById("notes").value = intent.notes;
+      syncNotes();
+      if (obj.peers) paint(obj);
+    };
+    reader.readAsText(f);
+  });
 })();
