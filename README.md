@@ -217,6 +217,16 @@ curl -sS -X POST https://glossafilter-download-tracker.vibelock.workers.dev/v1/r
   }'
 ```
 
+## Cite this
+
+Aziel Eliab. Glossa Filter. https://github.com/AzielEliab/glossafilter. https://glossafilter-download-tracker.vibelock.workers.dev.
+
+- Catalog: https://aziel-runtime.vibelock.workers.dev/
+- Worker homepage: https://glossafilter-download-tracker.vibelock.workers.dev/
+- Counted download (gzip HTTP 200, no 302): https://glossafilter-download-tracker.vibelock.workers.dev/download
+- GitHub: https://github.com/AzielEliab/glossafilter
+- Citation JSON: https://glossafilter-download-tracker.vibelock.workers.dev/cite.json
+
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE).
