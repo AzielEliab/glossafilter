@@ -192,6 +192,8 @@ workers/download-tracker/   Cloudflare Worker
 
 ## Use with Grok, ChatGPT, Venice
 
+- Catalog OpenAPI: https://aziel-runtime.vibelock.workers.dev/openapi.json
+
 Live HTTPS runtime on the existing download-tracker Worker. Mediation, not concealment. No live translator APIs.
 
 OpenAPI (ChatGPT GPT Actions / Venice custom HTTP / Grok custom tool):

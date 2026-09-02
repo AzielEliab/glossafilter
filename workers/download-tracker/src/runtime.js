@@ -3,10 +3,17 @@
  * Mediation, not concealment. No live translator APIs. /v1 never touches DOWNLOADS KV.
  */
 const PRODUCT = "glossafilter";
+const EXAMPLE_PAYLOAD = {
+  "subject": "package",
+  "rel": "release",
+  "object": "filter",
+  "channel": "tooling"
+};
+
 const VERSION = "0.1.0";
 const MOTTO = "Human opinion remains human, and tools remain tools.";
 const HOST = "https://glossafilter-download-tracker.vibelock.workers.dev";
-const SKILL = "---\nname: Glossa Filter\ndescription: Use when rendering the same intent into multiple language/dialect peers. Mediation, not concealment. No live translator APIs. Hosted /v1 via this Worker or aziel-runtime. Author Aziel Eliab.\n---\n\n# Glossa Filter\n\nHuman opinion remains human, and tools remain tools.\n\nAuthor: **Aziel Eliab**.\n\nUse when rendering the same intent into multiple language/dialect peers. Mediation, not concealment. No live translator APIs.\n\nAlways send `User-Agent: Mozilla/5.0`. Cloudflare Workers may 403 an empty agent.\n\n## Endpoints (this Worker)\n\nHost: `https://glossafilter-download-tracker.vibelock.workers.dev`\n\n| Method | Path | What |\n|--------|------|------|\n| GET | `/v1/health` | Liveness. Does not increment downloads. |\n| GET | `/v1/skill` | This markdown. Does not increment downloads. |\n| GET | `/v1/peers` | List peer language packs. |\n| POST | `/v1/render` | Render intent into peer phrasings. No live translator APIs. |\n\nOpenAPI: `https://glossafilter-download-tracker.vibelock.workers.dev/openapi.json`\n\nCatalog OpenAPI: `https://aziel-runtime.vibelock.workers.dev/openapi.json`\n\nMCP: `POST https://aziel-runtime.vibelock.workers.dev/mcp`\n\nCatalog aliases under `/p/glossafilter/\u2026`.\n\n## How to call (Mozilla/5.0)\n\n```bash\ncurl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/health\ncurl -s -A 'Mozilla/5.0' -X POST https://glossafilter-download-tracker.vibelock.workers.dev/v1/render \\\n  -H 'content-type: application/json' \\\n  -d '{\"channel\":\"tooling\",\"intent\":{\"what\":\"release\",\"action\":\"publish\"}}'\ncurl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/skill\n```\n\nGrok: import the catalog OpenAPI as a custom tool. ChatGPT: GPT Actions. Venice: HTTP tools.\n\n## Local (after one-click install)\n\n```bash\ncurl -fsSL https://glossafilter-download-tracker.vibelock.workers.dev/install.sh | bash\nglossafilter ui\n```\n\nThen open http://127.0.0.1:8792 (this computer only).\n\n## Honest banner\n\nTHIS IS: deterministic linguistic mediation into peer renders. THIS IS NOT: concealment, a live translator API, authorship stamping, or a canonical phrasing. Author Aziel Eliab.\n\nApache-2.0 (or the repo LICENSE). Forks are welcome and always allowed.\n";
+const SKILL = "---\nname: Glossa Filter\ndescription: Use when rendering the same intent into multiple language/dialect peers. Mediation, not concealment. No live translator APIs. Hosted /v1 via this Worker or aziel-runtime. Author Aziel Eliab.\n---\n\n# Glossa Filter\n\nHuman opinion remains human, and tools remain tools.\n\nAuthor: **Aziel Eliab**.\n\nUse when rendering the same intent into multiple language/dialect peers. Mediation, not concealment. No live translator APIs.\n\nAlways send `User-Agent: Mozilla/5.0`. Cloudflare Workers may 403 an empty agent.\n\n## Endpoints (this Worker)\n\nHost: `https://glossafilter-download-tracker.vibelock.workers.dev`\n\n| Method | Path | What |\n|--------|------|------|\n| GET | `/v1/health` | Liveness. Does not increment downloads. |\n| GET | `/v1/skill` | This markdown. Does not increment downloads. |\n| GET | `/v1/peers` | List peer language packs. |\n| POST | `/v1/render` | Render intent into peer phrasings. No live translator APIs. |\n\nOpenAPI: `https://glossafilter-download-tracker.vibelock.workers.dev/openapi.json`\n\nCatalog OpenAPI: `https://aziel-runtime.vibelock.workers.dev/openapi.json`\n\nMCP: `POST https://aziel-runtime.vibelock.workers.dev/mcp`\n\nCatalog aliases under `/p/glossafilter/\u2026`.\n\n## How to call (Mozilla/5.0)\n\n```bash\ncurl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/health\ncurl -s -A 'Mozilla/5.0' -X POST https://glossafilter-download-tracker.vibelock.workers.dev/v1/render \\\n  -H 'content-type: application/json' \\\n  -d '{\"channel\":\"tooling\",\"intent\":{\"what\":\"release\",\"action\":\"publish\"}}'\ncurl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/skill\n```\n\nGrok: import the catalog OpenAPI as a custom tool. ChatGPT: GPT Actions. Venice: HTTP tools.\n\n## Local (after one-click install)\n\n```bash\ncurl -fsSL https://glossafilter-download-tracker.vibelock.workers.dev/install.sh | bash\nglossafilter ui\n```\n\nThen open http://127.0.0.1:8792 (this computer only).\n\n## Honest banner\n\nTHIS IS: deterministic linguistic mediation into peer renders. THIS IS NOT: concealment, a live translator API, authorship stamping, or a canonical phrasing. Author Aziel Eliab.\n\nApache-2.0 (or the repo LICENSE). Forks are welcome and always allowed.\n\n## Catalog + local UI\n\nAuthor: **Aziel Eliab**. Honest scope: Render an intent across bundled peer ids. Human opinion remains human.\n\n- Catalog product: https://aziel-runtime.vibelock.workers.dev/p/glossafilter/\n- Catalog OpenAPI: https://aziel-runtime.vibelock.workers.dev/openapi.json\n- Catalog MCP: `POST https://aziel-runtime.vibelock.workers.dev/mcp`\n- This Worker skill: `GET https://glossafilter-download-tracker.vibelock.workers.dev/v1/skill`\n- This Worker OpenAPI: https://glossafilter-download-tracker.vibelock.workers.dev/openapi.json\n- Sample payload: `GET https://glossafilter-download-tracker.vibelock.workers.dev/v1/example`\n\nLocal UI: **Import JSON file** (`type=file`) and **Export JSON**. Then `glossafilter doctor`.\n\nGrok: import catalog or Worker OpenAPI as a custom tool. ChatGPT: GPT Actions. Venice: HTTP tools.\n";
 
 const CHANNELS = new Set(["tooling", "civic"]);
 const SLOT_KEYS = ["who", "what", "when", "action", "constraint", "interface"];
@@ -579,6 +586,7 @@ function openapiSpec() {
     servers: [{ url: HOST }],
     paths: {
       
+            "/v1/example": { get: { operationId: "glossafilterExample", summary: "Sample JSON payload. Does not increment downloads.", responses: { "200": { description: "OK" } } } },
       "/v1/skill": {
         get: {
           operationId: "glossafilter_skill",
@@ -641,8 +649,18 @@ export async function handleRuntimeApi(request, url) {
   if (!isApi) return null;
   try {
     if (path === "/v1/health" && request.method === "GET") {
-      return json({ ok: true, product: PRODUCT, version: VERSION });
+      return json({ ok: true, author: "Aziel Eliab", product: PRODUCT, version: VERSION });
     }
+  if ((path === "/v1/example" || path === "/v1/example/") && (request.method === "GET" || request.method === "HEAD")) {
+    return json({
+      ok: true,
+      product: PRODUCT,
+      author: "Aziel Eliab",
+      example: EXAMPLE_PAYLOAD,
+      note: "Sample payload only. Does not increment downloads.",
+    });
+  }
+
     if (path === "/v1/skill" && request.method === "GET") {
       return new Response(SKILL, {
       status: 200,
