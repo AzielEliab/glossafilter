@@ -26,7 +26,7 @@ Ops (do **not** increment downloads or views):
 - `GET /v1/skill` — this file
 - Product POSTs listed in OpenAPI
 
-Grok: import OpenAPI as a custom tool. ChatGPT: GPT Actions. Venice: HTTP tools.
+Works with MCP/OpenAPI-capable assistants, including ChatGPT (GPT Actions / OpenAI), Grok (xAI), Venice, Claude (Anthropic), Cursor (MCP), Glama (MCP), Perplexity, Microsoft Copilot / Bing, Google Gemini / Vertex, Mistral, Meta AI, Apple Intelligence surfaces, Amazon Q tooling, DuckAssist, You.com, Cohere, and other MCP/OpenAPI-capable assistants. Import OpenAPI as a custom tool, GPT Action, HTTP tool, or MCP catalog entry.
 
 ## Example
 
