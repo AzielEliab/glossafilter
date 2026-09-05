@@ -6,7 +6,7 @@ const PRODUCT = "glossafilter";
 const VERSION = "0.1.0";
 const MOTTO = "Human opinion remains human, and tools remain tools.";
 const HOST = "https://glossafilter-download-tracker.vibelock.workers.dev";
-const SKILL = "---\nname: Glossa Filter\ndescription: Use when rendering the same intent into multiple language/dialect peers. Mediation, not concealment. No live translator APIs. Hosted /v1 via this Worker or aziel-runtime. Author Aziel Eliab.\n---\n\n# Glossa Filter\n\nHuman opinion remains human, and tools remain tools.\n\nAuthor: **Aziel Eliab**.\n\nUse when rendering the same intent into multiple language/dialect peers. Mediation, not concealment. No live translator APIs.\n\nAlways send `User-Agent: Mozilla/5.0`. Cloudflare Workers may 403 an empty agent.\n\n## Endpoints (this Worker)\n\nHost: `https://glossafilter-download-tracker.vibelock.workers.dev`\n\n| Method | Path | What |\n|--------|------|------|\n| GET | `/v1/health` | Liveness. Does not increment downloads. |\n| GET | `/v1/skill` | This markdown. Does not increment downloads. |\n| GET | `/v1/peers` | List peer language packs. |\n| POST | `/v1/render` | Render intent into peer phrasings. No live translator APIs. |\n\nOpenAPI: `https://glossafilter-download-tracker.vibelock.workers.dev/openapi.json`\n\nCatalog OpenAPI: `https://aziel-runtime.vibelock.workers.dev/openapi.json`\n\nMCP: `POST https://aziel-runtime.vibelock.workers.dev/mcp`\n\nCatalog aliases under `/p/glossafilter/\u2026`.\n\n## How to call (Mozilla/5.0)\n\n```bash\ncurl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/health\ncurl -s -A 'Mozilla/5.0' -X POST https://glossafilter-download-tracker.vibelock.workers.dev/v1/render \\\n  -H 'content-type: application/json' \\\n  -d '{\"channel\":\"tooling\",\"intent\":{\"what\":\"release\",\"action\":\"publish\"}}'\ncurl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/skill\n```\n\nGrok: import the catalog OpenAPI as a custom tool. ChatGPT: GPT Actions. Venice: HTTP tools.\n\n## Local (after one-click install)\n\n```bash\ncurl -fsSL https://glossafilter-download-tracker.vibelock.workers.dev/install.sh | bash\nglossafilter ui\n```\n\nThen open http://127.0.0.1:8792 (this computer only).\n\n## Honest banner\n\nTHIS IS: deterministic linguistic mediation into peer renders. THIS IS NOT: concealment, a live translator API, authorship stamping, or a canonical phrasing. Author Aziel Eliab.\n\nApache-2.0 (or the repo LICENSE). Forks are welcome and always allowed.\n";
+const SKILL = "---\nname: Glossa Filter\ndescription: Use when rendering the same intent into multiple language/dialect peers. Mediation, not concealment. No live translator APIs. Hosted /v1 via this Worker or aziel-runtime. Author Aziel Eliab.\n---\n\n# Glossa Filter\n\nHuman opinion remains human, and tools remain tools.\n\nAuthor: **Aziel Eliab**.\n\nUse when rendering the same intent into multiple language/dialect peers. Mediation, not concealment. No live translator APIs.\n\nAlways send `User-Agent: Mozilla/5.0`. Cloudflare Workers may 403 an empty agent.\n\n## Endpoints (this Worker)\n\nHost: `https://glossafilter-download-tracker.vibelock.workers.dev`\n\n| Method | Path | What |\n|--------|------|------|\n| GET | `/v1/health` | Liveness. Does not increment downloads. |\n| GET | `/v1/skill` | This markdown. Does not increment downloads. |\n| GET | `/v1/peers` | List peer language packs. |\n| POST | `/v1/render` | Render intent into peer phrasings. No live translator APIs. |\n\nOpenAPI: `https://glossafilter-download-tracker.vibelock.workers.dev/openapi.json`\n\nCatalog OpenAPI: `https://aziel-runtime.vibelock.workers.dev/openapi.json`\n\nMCP: `POST https://aziel-runtime.vibelock.workers.dev/mcp`\n\nCatalog aliases under `/p/glossafilter/\u2026`.\n\n## How to call (Mozilla/5.0)\n\n```bash\ncurl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/health\ncurl -s -A 'Mozilla/5.0' -X POST https://glossafilter-download-tracker.vibelock.workers.dev/v1/render \\\n  -H 'content-type: application/json' \\\n  -d '{\"channel\":\"tooling\",\"intent\":{\"what\":\"release\",\"action\":\"publish\"}}'\ncurl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/skill\n```\n\nWorks with MCP/OpenAPI-capable assistants, including ChatGPT (GPT Actions / OpenAI), Grok (xAI), Venice, Claude (Anthropic), Cursor (MCP), Glama (MCP), Perplexity, Microsoft Copilot / Bing, Google Gemini / Vertex, Mistral, Meta AI, Apple Intelligence surfaces, Amazon Q tooling, DuckAssist, You.com, Cohere, and other MCP/OpenAPI-capable assistants. Import OpenAPI as a custom tool, GPT Action, HTTP tool, or MCP catalog entry.\n\n## Local (after one-click install)\n\n```bash\ncurl -fsSL https://glossafilter-download-tracker.vibelock.workers.dev/install.sh | bash\nglossafilter ui\n```\n\nThen open http://127.0.0.1:8792 (this computer only).\n\n## Honest banner\n\nTHIS IS: deterministic linguistic mediation into peer renders. THIS IS NOT: concealment, a live translator API, authorship stamping, or a canonical phrasing. Author Aziel Eliab.\n\nApache-2.0 (or the repo LICENSE). Forks are welcome and always allowed.\n";
 
 const CHANNELS = new Set(["tooling", "civic"]);
 const SLOT_KEYS = ["who", "what", "when", "action", "constraint", "interface"];
@@ -609,25 +609,44 @@ function aiHtml() {
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Glossa Filter — use with Grok, ChatGPT, Venice</title>
+<title>Glossa Filter — use with AI assistants</title>
 <style>
   :root { color-scheme: dark; }
   body { font: 16px/1.45 system-ui, sans-serif; max-width: 42rem; margin: 3rem auto; padding: 0 1.25rem; background: #0e1014; color: #e8eaef; }
   code { background: #151922; padding: .15rem .4rem; border-radius: 4px; }
   a { color: #c9d4ff; }
   .motto { color: #9aa3b2; font-style: italic; }
+  ul { padding-left: 1.2rem; }
 </style>
 <body>
   <h1>Glossa Filter live API</h1>
   <p class="motto">${MOTTO}</p>
-  <p>Mediation, not concealment. Parallel peer renders. No live translator APIs (no Google / DeepL / LLM).</p>
-  <h2>ChatGPT (GPT Actions)</h2>
-  <p>Paste this OpenAPI URL into GPT Actions:</p>
+  <p>Mediation, not concealment. Parallel peer renders. No live translator APIs (no Google / DeepL / LLM). Author Aziel Eliab.</p>
+  <h2>Use with AI assistants</h2>
+  <p>Works with MCP/OpenAPI-capable assistants, including:</p>
+  <ul>
+    <li>ChatGPT (GPT Actions / OpenAI)</li>
+    <li>Grok (xAI)</li>
+    <li>Venice</li>
+    <li>Claude (Anthropic)</li>
+    <li>Cursor (MCP)</li>
+    <li>Glama (MCP)</li>
+    <li>Perplexity</li>
+    <li>Microsoft Copilot / Bing</li>
+    <li>Google Gemini / Vertex</li>
+    <li>Mistral</li>
+    <li>Meta AI</li>
+    <li>Apple Intelligence surfaces</li>
+    <li>Amazon Q tooling</li>
+    <li>DuckAssist</li>
+    <li>You.com</li>
+    <li>Cohere</li>
+    <li>other MCP/OpenAPI-capable assistants</li>
+  </ul>
+  <h2>OpenAPI</h2>
+  <p>Import this OpenAPI URL as a custom tool, GPT Action, or HTTP tool:</p>
   <p><code>${HOST}/openapi.json</code></p>
-  <h2>Grok / xAI</h2>
-  <p>Custom tool pointing at <code>POST ${HOST}/v1/render</code> and <code>GET ${HOST}/v1/peers</code>.</p>
-  <h2>Venice</h2>
-  <p>Custom HTTP tool from the same OpenAPI URL.</p>
+  <p>Typical ops: <code>POST ${HOST}/v1/render</code> and <code>GET ${HOST}/v1/peers</code>.</p>
   <h2>MCP catalog</h2>
   <p>The shared catalog (ships separately) is <code>https://aziel-runtime.vibelock.workers.dev/mcp</code>.</p>
   <p><a href="/openapi.json">openapi.json</a> · <a href="/v1/health">health</a> · <a href="/">downloads</a></p>
