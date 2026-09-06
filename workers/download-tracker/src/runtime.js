@@ -609,7 +609,7 @@ function aiHtml() {
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Glossa Filter — use with AI assistants</title>
+<title>Glossa Filter — use with AI assistants — Aziel Eliab</title>
 <style>
   :root { color-scheme: dark; }
   body { font: 16px/1.45 system-ui, sans-serif; max-width: 42rem; margin: 3rem auto; padding: 0 1.25rem; background: #0e1014; color: #e8eaef; }

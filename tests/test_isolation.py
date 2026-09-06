@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import ast
+import re
 import sys
 from pathlib import Path
 
@@ -89,6 +90,16 @@ def test_worker_kv_real_and_isolated() -> None:
     assert "zionpattern" not in lowered
     assert "decisiongate" not in lowered
     assert "azos" not in lowered
+
+
+def test_worker_page_titles_include_author() -> None:
+    worker_src = ROOT / "workers" / "download-tracker" / "src"
+    titles: list[str] = []
+    for js in sorted(worker_src.glob("*.js")):
+        titles.extend(re.findall(r"<title>(.*?)</title>", js.read_text(encoding="utf-8")))
+    assert titles, "expected Worker HTML <title> tags"
+    for title in titles:
+        assert "Aziel Eliab" in title, title
 
 
 def test_runtime_has_no_network_translator_imports() -> None:
