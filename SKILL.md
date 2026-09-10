@@ -1,6 +1,6 @@
 ---
 name: Glossa Filter
-description: Use when calling Glossa Filter hosted /v1 or installing the local package. Author Aziel Eliab.
+description: Use when calling Glossa Filter hosted /v1 or installing the local package. Dual surface: Worker /v1 + catalog MCP. This Worker /v1/mesh/* PROXY to aziel-runtime via AZIEL_RUNTIME. Suite mesh default OFF. QNM-BUILD-1.0 live|locked|isolated. No Node Gate. No auto-heal. Not anonymity. Author Aziel Eliab.
 ---
 
 # Glossa Filter
@@ -24,6 +24,9 @@ Ops (do **not** increment downloads or views):
 
 - `GET /v1/health` — liveness
 - `GET /v1/skill` — this file
+- `GET /v1/mesh` — PROXY suite mesh status. Default OFF. QNM live|locked|isolated. Never enables.
+- `GET /v1/mesh/nodes` — PROXY Live Nodes roster (5-minute presence).
+- `POST /v1/mesh/{enable,disable,join,heartbeat,leave,broadcast}` — PROXY. Bearer required to enable. No auto-heal. Anon-broadcast is not a publish path.
 - Product POSTs listed in OpenAPI
 
 Works with MCP/OpenAPI-capable assistants, including ChatGPT (GPT Actions / OpenAI), Grok (xAI), Venice, Claude (Anthropic), Cursor (MCP), Glama (MCP), Perplexity, Microsoft Copilot / Bing, Google Gemini / Vertex, Mistral, Meta AI, Apple Intelligence surfaces, Amazon Q tooling, DuckAssist, You.com, Cohere, and other MCP/OpenAPI-capable assistants. Import OpenAPI as a custom tool, GPT Action, HTTP tool, or MCP catalog entry.
@@ -33,6 +36,7 @@ Works with MCP/OpenAPI-capable assistants, including ChatGPT (GPT Actions / Open
 ```bash
 curl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/health
 curl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/skill
+curl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/mesh
 ```
 
 ## Local (after one-click install)
@@ -43,7 +47,7 @@ glossafilter ui
 glossafilter doctor
 ```
 
-Then open http://127.0.0.1:8792 (loopback only).
+Then open http://127.0.0.1:8792 (loopback only). Worker homepage Live Nodes strip polls `GET /v1/mesh` (default OFF).
 
 Counted download (gzip HTTP 200, no 302): https://glossafilter-download-tracker.vibelock.workers.dev/download?asset=glossafilter-0.1.0.tar.gz
 GitHub: https://github.com/AzielEliab/glossafilter

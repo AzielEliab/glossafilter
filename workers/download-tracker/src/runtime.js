@@ -1,12 +1,14 @@
 /**
  * Glossa Filter hosted runtime (port of intent.py + engine.py).
  * Mediation, not concealment. No live translator APIs. /v1 never touches DOWNLOADS KV.
+ * /v1/mesh/* PROXY to aziel-runtime via AZIEL_RUNTIME (handled in index.js before this catch-all).
  */
+import { meshOpenApiPaths, meshPointer } from "./mesh.js";
 const PRODUCT = "glossafilter";
 const VERSION = "0.1.0";
 const MOTTO = "Human opinion remains human, and tools remain tools.";
 const HOST = "https://glossafilter-download-tracker.vibelock.workers.dev";
-const SKILL = "---\nname: Glossa Filter\ndescription: Use when rendering the same intent into multiple language/dialect peers. Mediation, not concealment. No live translator APIs. Hosted /v1 via this Worker or aziel-runtime. Author Aziel Eliab.\n---\n\n# Glossa Filter\n\nHuman opinion remains human, and tools remain tools.\n\nAuthor: **Aziel Eliab**.\n\nUse when rendering the same intent into multiple language/dialect peers. Mediation, not concealment. No live translator APIs.\n\nAlways send `User-Agent: Mozilla/5.0`. Cloudflare Workers may 403 an empty agent.\n\n## Endpoints (this Worker)\n\nHost: `https://glossafilter-download-tracker.vibelock.workers.dev`\n\n| Method | Path | What |\n|--------|------|------|\n| GET | `/v1/health` | Liveness. Does not increment downloads. |\n| GET | `/v1/skill` | This markdown. Does not increment downloads. |\n| GET | `/v1/peers` | List peer language packs. |\n| POST | `/v1/render` | Render intent into peer phrasings. No live translator APIs. |\n\nOpenAPI: `https://glossafilter-download-tracker.vibelock.workers.dev/openapi.json`\n\nCatalog OpenAPI: `https://aziel-runtime.vibelock.workers.dev/openapi.json`\n\nMCP: `POST https://aziel-runtime.vibelock.workers.dev/mcp`\n\nCatalog aliases under `/p/glossafilter/\u2026`.\n\n## How to call (Mozilla/5.0)\n\n```bash\ncurl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/health\ncurl -s -A 'Mozilla/5.0' -X POST https://glossafilter-download-tracker.vibelock.workers.dev/v1/render \\\n  -H 'content-type: application/json' \\\n  -d '{\"channel\":\"tooling\",\"intent\":{\"what\":\"release\",\"action\":\"publish\"}}'\ncurl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/skill\n```\n\nWorks with MCP/OpenAPI-capable assistants, including ChatGPT (GPT Actions / OpenAI), Grok (xAI), Venice, Claude (Anthropic), Cursor (MCP), Glama (MCP), Perplexity, Microsoft Copilot / Bing, Google Gemini / Vertex, Mistral, Meta AI, Apple Intelligence surfaces, Amazon Q tooling, DuckAssist, You.com, Cohere, and other MCP/OpenAPI-capable assistants. Import OpenAPI as a custom tool, GPT Action, HTTP tool, or MCP catalog entry.\n\n## Local (after one-click install)\n\n```bash\ncurl -fsSL https://glossafilter-download-tracker.vibelock.workers.dev/install.sh | bash\nglossafilter ui\n```\n\nThen open http://127.0.0.1:8792 (this computer only).\n\n## Honest banner\n\nTHIS IS: deterministic linguistic mediation into peer renders. THIS IS NOT: concealment, a live translator API, authorship stamping, or a canonical phrasing. Author Aziel Eliab.\n\nApache-2.0 (or the repo LICENSE). Forks are welcome and always allowed.\n";
+const SKILL = "---\nname: Glossa Filter\ndescription: Use when rendering the same intent into multiple language/dialect peers. Mediation, not concealment. No live translator APIs. Dual surface: Worker /v1 + catalog MCP. This Worker /v1/mesh/* PROXY to aziel-runtime via AZIEL_RUNTIME. Suite mesh default OFF. QNM-BUILD-1.0 live|locked|isolated. No Node Gate. No auto-heal. Not anonymity. Author Aziel Eliab.\n---\n\n# Glossa Filter\n\nHuman opinion remains human, and tools remain tools.\n\nAuthor: **Aziel Eliab**.\n\nUse when rendering the same intent into multiple language/dialect peers. Mediation, not concealment. No live translator APIs.\n\nAlways send `User-Agent: Mozilla/5.0`. Cloudflare Workers may 403 an empty agent.\n\n## Endpoints (this Worker)\n\nHost: `https://glossafilter-download-tracker.vibelock.workers.dev`\n\n| Method | Path | What |\n|--------|------|------|\n| GET | `/v1/health` | Liveness. Does not increment downloads. |\n| GET | `/v1/skill` | This markdown. Does not increment downloads. |\n| GET | `/v1/mesh` | PROXY suite mesh status. Default OFF. QNM live|locked|isolated. Never enables. |\n| GET | `/v1/mesh/nodes` | PROXY Live Nodes roster (5-minute presence). |\n| POST | `/v1/mesh/{enable,disable,join,heartbeat,leave,broadcast}` | PROXY. Bearer required to enable. No auto-heal. Anon-broadcast is not a publish path. |\n| GET | `/v1/peers` | List peer language packs. |\n| POST | `/v1/render` | Render intent into peer phrasings. No live translator APIs. |\n\nOpenAPI: `https://glossafilter-download-tracker.vibelock.workers.dev/openapi.json`\n\nCatalog OpenAPI: `https://aziel-runtime.vibelock.workers.dev/openapi.json`\n\nMCP: `POST https://aziel-runtime.vibelock.workers.dev/mcp`\n\nCatalog aliases under `/p/glossafilter/\u2026`.\n\nSuite mesh: `GET https://glossafilter-download-tracker.vibelock.workers.dev/v1/mesh` (PROXY; default OFF). Catalog MCP `mesh_*` + FragGate `slug=mesh`. QNM-BUILD-1.0 live|locked|isolated. No Node Gate. No auto-heal. Not anonymity.\n\n## How to call (Mozilla/5.0)\n\n```bash\ncurl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/health\ncurl -s -A 'Mozilla/5.0' -X POST https://glossafilter-download-tracker.vibelock.workers.dev/v1/render \\\n  -H 'content-type: application/json' \\\n  -d '{\"channel\":\"tooling\",\"intent\":{\"what\":\"release\",\"action\":\"publish\"}}'\ncurl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/skill\ncurl -s -A 'Mozilla/5.0' https://glossafilter-download-tracker.vibelock.workers.dev/v1/mesh\n```\n\nWorks with MCP/OpenAPI-capable assistants, including ChatGPT (GPT Actions / OpenAI), Grok (xAI), Venice, Claude (Anthropic), Cursor (MCP), Glama (MCP), Perplexity, Microsoft Copilot / Bing, Google Gemini / Vertex, Mistral, Meta AI, Apple Intelligence surfaces, Amazon Q tooling, DuckAssist, You.com, Cohere, and other MCP/OpenAPI-capable assistants. Import OpenAPI as a custom tool, GPT Action, HTTP tool, or MCP catalog entry. Worker homepage Live Nodes strip polls `GET /v1/mesh` (default OFF).\n\n## Local (after one-click install)\n\n```bash\ncurl -fsSL https://glossafilter-download-tracker.vibelock.workers.dev/install.sh | bash\nglossafilter ui\n```\n\nThen open http://127.0.0.1:8792 (this computer only).\n\n## Honest banner\n\nTHIS IS: deterministic linguistic mediation into peer renders. THIS IS NOT: concealment, a live translator API, authorship stamping, or a canonical phrasing. Author Aziel Eliab.\n\nApache-2.0 (or the repo LICENSE). Forks are welcome and always allowed.\n";
 
 const CHANNELS = new Set(["tooling", "civic"]);
 const SLOT_KEYS = ["who", "what", "when", "action", "constraint", "interface"];
@@ -232,8 +234,8 @@ const PACKS_RAW = {
 function corsHeaders() {
   return {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET, POST, HEAD, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Accept, Authorization, X-Aziel-Runtime-Token, User-Agent",
   };
 }
 
@@ -574,7 +576,7 @@ function openapiSpec() {
     info: {
       title: "Glossa Filter runtime",
       version: VERSION,
-      description: "Deterministic linguistic mediation. Peer renders, not a translator. " + MOTTO,
+      description: "Deterministic linguistic mediation. Peer renders, not a translator. " + MOTTO + " Suite mesh /v1/mesh/* PROXY to aziel-runtime (AZIEL_RUNTIME). Default OFF. QNM-BUILD-1.0 live|locked|isolated. No Node Gate. No auto-heal. Not anonymity. Aziel Eliab only.",
     },
     servers: [{ url: HOST }],
     paths: {
@@ -600,6 +602,7 @@ function openapiSpec() {
           responses: { "200": { description: "peer map", content: { "application/json": { schema: { type: "object" } } } } },
         },
       },
+      ...meshOpenApiPaths(),
     },
   };
 }
@@ -648,19 +651,21 @@ function aiHtml() {
   <p><code>${HOST}/openapi.json</code></p>
   <p>Typical ops: <code>POST ${HOST}/v1/render</code> and <code>GET ${HOST}/v1/peers</code>.</p>
   <h2>MCP catalog</h2>
-  <p>The shared catalog (ships separately) is <code>https://aziel-runtime.vibelock.workers.dev/mcp</code>.</p>
-  <p><a href="/openapi.json">openapi.json</a> · <a href="/v1/health">health</a> · <a href="/">downloads</a></p>
+  <p>The shared catalog (ships separately) is <code>https://aziel-runtime.vibelock.workers.dev/mcp</code> (catalog <code>mesh_*</code> + FragGate <code>slug=mesh</code>).</p>
+  <p>Suite mesh: <code>GET ${HOST}/v1/mesh</code> PROXY to aziel-runtime. Default OFF. QNM-BUILD-1.0 live|locked|isolated. No Node Gate. No auto-heal. Not anonymity. Author: Aziel Eliab only.</p>
+  <p><a href="/openapi.json">openapi.json</a> · <a href="/v1/health">health</a> · <a href="/v1/mesh">/v1/mesh</a> · <a href="/">downloads</a></p>
 </body>
 </html>`;
 }
 
 export async function handleRuntimeApi(request, url) {
   const path = url.pathname;
+  if (path === "/v1/mesh" || path.startsWith("/v1/mesh/")) return null;
   const isApi = path === "/v1" || path.startsWith("/v1/") || path === "/openapi.json" || path === "/ai";
   if (!isApi) return null;
   try {
     if (path === "/v1/health" && request.method === "GET") {
-      return json({ ok: true, product: PRODUCT, version: VERSION });
+      return json({ ok: true, product: PRODUCT, version: VERSION, mesh: meshPointer() });
     }
     if (path === "/v1/skill" && request.method === "GET") {
       return new Response(SKILL, {
@@ -683,7 +688,7 @@ export async function handleRuntimeApi(request, url) {
       const result = await render(intent, body.peers || body.peer || null);
       return json(result);
     }
-    return json({ error: "not found" }, 404);
+    return json({ error: "not found", hint: "GET /v1/health GET /v1/skill GET /v1/peers POST /v1/render GET /v1/mesh" }, 404);
   } catch (err) {
     if (err instanceof GlossaError) return json({ error: err.message }, err.code || 400);
     return json({ error: String(err.message || err) }, 400);
