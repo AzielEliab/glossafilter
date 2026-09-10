@@ -33,6 +33,29 @@ def test_mesh_contract_default_off_qnm_law() -> None:
     assert "code: extra.code || \"MESH-OK\"" in MESH or '"MESH-OK"' in MESH
 
 
+def test_qns_cd_cross_map_cite_only() -> None:
+    assert 'QNS_CD_SPEC = "QNS-CD-1.0"' in MESH
+    assert "export const QNS_CD" in MESH
+    assert "photon QNS1 packet transfer" in MESH
+    assert "https://github.com/AzielEliab/qnm-node" in MESH
+    assert "https://github.com/AzielEliab/aziel-runtime" in MESH
+    assert "https://github.com/AzielEliab/azinterface" in MESH
+    assert "QNS-CD-1.0 photon QNS1 packet transfer. Suite mesh default off" in MESH
+    assert "public_qnsd_proxy: false" in MESH
+    assert "softwares_tab: false" in MESH
+    assert "stampQnsCd" in MESH
+    assert "qnsCdFields" in MESH
+    assert '"/v1/qnsd"' not in MESH
+    assert '"/v1/qns"' not in MESH
+    assert "No public qnsd proxy" in MESH
+    assert "QNS-CD-1.0" in README
+    assert "QNS-CD-1.0" in SKILL
+    assert "QNS-CD-1.0" in WORKER_README
+    assert "QNS-CD-1.0" in RUNTIME
+    assert "QNS-CD-1.0" in INDEX
+    assert "not a public qnsd proxy" in INDEX.lower() or "No public qnsd proxy" in INDEX
+
+
 def test_mesh_pointer_and_openapi_helpers() -> None:
     assert "export function meshPointer" in MESH
     assert "export function meshOpenApiPaths" in MESH

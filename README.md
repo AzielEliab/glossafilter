@@ -49,7 +49,7 @@ The Worker serves the gzip itself (HTTP 200, no 302 to GitHub).
 - Direct tarball: [glossafilter-0.1.0.tar.gz](https://glossafilter-download-tracker.vibelock.workers.dev/download?asset=glossafilter-0.1.0.tar.gz)
 - One-click install: [https://glossafilter-download-tracker.vibelock.workers.dev/install.sh](https://glossafilter-download-tracker.vibelock.workers.dev/install.sh)
 - Skill: [https://glossafilter-download-tracker.vibelock.workers.dev/v1/skill](https://glossafilter-download-tracker.vibelock.workers.dev/v1/skill)
-- Suite mesh proxy: [https://glossafilter-download-tracker.vibelock.workers.dev/v1/mesh](https://glossafilter-download-tracker.vibelock.workers.dev/v1/mesh) — default OFF; QNM live / locked / isolated
+- Suite mesh proxy: [https://glossafilter-download-tracker.vibelock.workers.dev/v1/mesh](https://glossafilter-download-tracker.vibelock.workers.dev/v1/mesh) — default OFF; QNM live / locked / isolated; QNS-CD-1.0 photon QNS1 cross-map (hub cite only; no public qnsd proxy)
 - OpenAPI: [https://glossafilter-download-tracker.vibelock.workers.dev/openapi.json](https://glossafilter-download-tracker.vibelock.workers.dev/openapi.json)
 - GitHub: [https://github.com/AzielEliab/glossafilter](https://github.com/AzielEliab/glossafilter)
 
@@ -205,7 +205,7 @@ https://glossafilter-download-tracker.vibelock.workers.dev/openapi.json
 
 Setup notes: [https://glossafilter-download-tracker.vibelock.workers.dev/ai](https://glossafilter-download-tracker.vibelock.workers.dev/ai)
 
-MCP catalog (ships separately): `https://aziel-runtime.vibelock.workers.dev/mcp`. Suite mesh `/v1/mesh/*` PROXY via `AZIEL_RUNTIME` (default OFF; QNM-BUILD-1.0 live|locked|isolated; no Node Gate). Catalog MCP `mesh_*` + FragGate `slug=mesh`.
+MCP catalog (ships separately): `https://aziel-runtime.vibelock.workers.dev/mcp`. Suite mesh `/v1/mesh/*` PROXY via `AZIEL_RUNTIME` (default OFF; QNM-BUILD-1.0 live|locked|isolated; no Node Gate). Catalog MCP `mesh_*` + FragGate `slug=mesh`. QNS-CD-1.0 (photon QNS1 packet transfer) is a hub cite / Worker mesh cross-map only — local qnsd in [qnm-node](https://github.com/AzielEliab/qnm-node), runtime cites in [aziel-runtime](https://github.com/AzielEliab/aziel-runtime). Not a Softwares-tab product. No public qnsd proxy.
 
 ```bash
 curl -sS -X POST https://glossafilter-download-tracker.vibelock.workers.dev/v1/render \

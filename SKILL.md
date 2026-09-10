@@ -1,6 +1,6 @@
 ---
 name: Glossa Filter
-description: Use when calling Glossa Filter hosted /v1 or installing the local package. Dual surface: Worker /v1 + catalog MCP. This Worker /v1/mesh/* PROXY to aziel-runtime via AZIEL_RUNTIME. Suite mesh default OFF. QNM-BUILD-1.0 live|locked|isolated. No Node Gate. No auto-heal. Not anonymity. Author Aziel Eliab.
+description: Use when calling Glossa Filter hosted /v1 or installing the local package. Dual surface: Worker /v1 + catalog MCP. This Worker /v1/mesh/* PROXY to aziel-runtime via AZIEL_RUNTIME. Suite mesh default OFF. QNM-BUILD-1.0 live|locked|isolated. QNS-CD-1.0 photon QNS1 hub cite (no public qnsd proxy). No Node Gate. No auto-heal. Not anonymity. Author Aziel Eliab.
 ---
 
 # Glossa Filter
@@ -24,8 +24,8 @@ Ops (do **not** increment downloads or views):
 
 - `GET /v1/health` — liveness
 - `GET /v1/skill` — this file
-- `GET /v1/mesh` — PROXY suite mesh status. Default OFF. QNM live|locked|isolated. Never enables.
-- `GET /v1/mesh/nodes` — PROXY Live Nodes roster (5-minute presence).
+- `GET /v1/mesh` — PROXY suite mesh status. Default OFF. QNM live|locked|isolated. QNS-CD-1.0 photon QNS1 cross-map (hub cite only). Never enables. No public qnsd proxy.
+- `GET /v1/mesh/nodes` — PROXY Live Nodes roster (5-minute presence). Envelope includes the QNS-CD-1.0 cross-map.
 - `POST /v1/mesh/{enable,disable,join,heartbeat,leave,broadcast}` — PROXY. Bearer required to enable. No auto-heal. Anon-broadcast is not a publish path.
 - Product POSTs listed in OpenAPI
 
@@ -47,7 +47,7 @@ glossafilter ui
 glossafilter doctor
 ```
 
-Then open http://127.0.0.1:8792 (loopback only). Worker homepage Live Nodes strip polls `GET /v1/mesh` (default OFF).
+Then open http://127.0.0.1:8792 (loopback only). Worker homepage Live Nodes strip polls `GET /v1/mesh` (default OFF). QNS-CD-1.0 is a hub cite / mesh cross-map only ([qnm-node](https://github.com/AzielEliab/qnm-node), [aziel-runtime](https://github.com/AzielEliab/aziel-runtime)); not a Softwares-tab product; no public qnsd proxy.
 
 Counted download (gzip HTTP 200, no 302): https://glossafilter-download-tracker.vibelock.workers.dev/download?asset=glossafilter-0.1.0.tar.gz
 GitHub: https://github.com/AzielEliab/glossafilter
