@@ -35,11 +35,14 @@ live translator.
 6. **Do not merge this product into ForgeReceipts, ZionPattern Solver,
    DecisionGATE, AZ-OS, or any *Lock tree.** Glossa Filter is standalone.
 7. **Do not deploy the download tracker** from this tree. Parent ships.
-8. New behavior needs a test that fails without the change.
-9. **Separation of Roles:** `channel=tooling` may only talk about
+8. **Door vs local op.** `/v1/mesh/*` PROXY to aziel-runtime. Local ops are `/v1/{op}` only.
+   Suite mesh default OFF; QNM rollup live|locked|isolated; no Node Gate;
+   no auto-heal; not anonymity.
+9. New behavior needs a test that fails without the change.
+10. **Separation of Roles:** `channel=tooling` may only talk about
    behavior and interface. Mixing philosophy into tooling is a failure,
    not a render.
-10. Ethical boundaries stay in README and code comments:
+11. Ethical boundaries stay in README and code comments:
     - No deception: content remains accurate.
     - No incitement: outputs are non-mobilizing.
     - No identity masking for wrongdoing.
@@ -54,6 +57,7 @@ live translator.
 - Local UI: `glossafilter/ui.py`, `glossafilter/web/`
 - Spec: `docs/whitepaper.md`
 - Isolated counter: `workers/download-tracker/`
+- Suite mesh / QNM Live Nodes: `workers/download-tracker/src/mesh.js` (`/v1/mesh/*` PROXY to aziel-runtime).
 
 ## License of contributions
 
