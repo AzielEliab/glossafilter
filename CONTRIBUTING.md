@@ -36,8 +36,9 @@ live translator.
    DecisionGATE, AZ-OS, or any *Lock tree.** Glossa Filter is standalone.
 7. **Do not deploy the download tracker** from this tree. Parent ships.
 8. **Door vs local op.** `/v1/mesh/*` PROXY to aziel-runtime. Local ops are `/v1/{op}` only.
-   Suite mesh default OFF; QNM rollup live|locked|isolated; no Node Gate;
-   no auto-heal; not anonymity.
+   Suite mesh default OFF; QNM rollup live|locked|isolated; QNS-CD-1.0
+   photon QNS1 is a hub cite / mesh cross-map only (no public qnsd proxy);
+   no Node Gate; no auto-heal; not anonymity.
 9. New behavior needs a test that fails without the change.
 10. **Separation of Roles:** `channel=tooling` may only talk about
    behavior and interface. Mixing philosophy into tooling is a failure,
