@@ -620,8 +620,11 @@ function aiHtml() {
   a { color: #c9d4ff; }
   .motto { color: #9aa3b2; font-style: italic; }
   ul { padding-left: 1.2rem; }
+  .brandrow { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; }
+  .brandmark { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; flex: 0 0 auto; box-shadow: 0 0 0 1px #d4af3733; }
 </style>
 <body>
+  <div class="brandrow"><img class="brandmark" src="/sigil.png" width="40" height="40" alt="" decoding="async"></div>
   <h1>Glossa Filter live API</h1>
   <p class="motto">${MOTTO}</p>
   <p>Mediation, not concealment. Parallel peer renders. No live translator APIs (no Google / DeepL / LLM). Author Aziel Eliab.</p>

@@ -346,8 +346,11 @@ async function indexHtml(env) {
   #meshStrip button:hover { background: #241c0d; color: #c9a227; }
   #meshStrip input { width: 10rem; padding: .4rem .55rem; border: 1px solid #c9a227; border-radius: 8px; background: #0e0e0e; color: #e8eaef; font: inherit; }
   #meshProducts { flex-basis: 100%; margin: 0; }
+  .brandrow { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; }
+  .brandmark { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; flex: 0 0 auto; box-shadow: 0 0 0 1px #d4af3733; }
 </style>
 <body>
+  <div class="brandrow"><img class="brandmark" src="/sigil.png" width="40" height="40" alt="" decoding="async"></div>
   <h1>Glossa Filter</h1>
   <p class="motto">Human opinion remains human, and tools remain tools. Author Aziel Eliab.</p>
   <p class="banner">THIS IS: deterministic linguistic mediation into peer renders. THIS IS NOT: concealment, a live translator API, authorship stamping, or a canonical phrasing. Author Aziel Eliab.</p>
