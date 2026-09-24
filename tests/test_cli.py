@@ -88,6 +88,8 @@ def test_cli_empty_nonzero(capsys) -> None:
     err = capsys.readouterr().err
     assert code == 1
     assert "empty" in err.lower() or "error" in err.lower()
+    assert "Next:" in err
+    assert "glossafilter render --subject" in err
 
 
 def test_cli_identity_rejected(capsys, tmp_path: Path) -> None:
@@ -136,3 +138,51 @@ def test_help_lists_ui_and_version() -> None:
     assert "ui" in text
     assert "version" in text
     assert "127.0.0.1:8792" in text or "glossafilter ui" in text
+    assert "examples:" in text
+    assert "advanced:" in text
+    assert "changelog" not in text.lower()
+    assert "the following arguments are required" not in text
+
+
+def test_bare_command_welcomes(capsys) -> None:
+    assert main([]) == 0
+    out = capsys.readouterr().out
+    err = capsys.readouterr().err
+    assert "glossafilter ui" in out
+    assert "http://127.0.0.1:8792/" in out
+    assert "Aziel Eliab" in out
+    assert "glossafilter --help" in out
+    assert err == ""
+    assert "required: cmd" not in out
+
+
+def test_unknown_command_has_next_step(capsys) -> None:
+    code = main(["bogus"])
+    err = capsys.readouterr().err
+    assert code == 2
+    assert 'Unknown command "bogus"' in err
+    assert "glossafilter --help" in err
+    assert "Traceback" not in err
+
+
+def test_import_human_and_json(capsys, tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    src = tmp_path / "in.json"
+    src.write_text(json.dumps({"hello": 1}), encoding="utf-8")
+    assert main(["import", str(src)]) == 0
+    out = capsys.readouterr().out
+    assert "Imported" in out
+    assert not out.lstrip().startswith("{")
+    assert main(["import", "--json", str(src)]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["ok"] is True
+    assert "hello" in payload["keys"]
+    dest = tmp_path / "out.json"
+    assert main(["export", str(dest)]) == 0
+    human = capsys.readouterr().out
+    assert "Exported" in human
+    assert dest.is_file()
+    assert main(["export", "--json", str(dest)]) == 0
+    exported = json.loads(capsys.readouterr().out)
+    assert exported["ok"] is True
+    assert exported["author"] == "Aziel Eliab"

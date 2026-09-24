@@ -33,9 +33,24 @@ def test_ui_get_root_200_contains_motto() -> None:
         assert "cdn" not in html.lower()
         assert "googleapis" not in html.lower()
         assert "None is primary" in html or "none is primary" in html.lower() or "none is canonical" in html.lower() or "No primary language" in html
+        assert "Advanced" in html
+        assert "<details" in html
+        assert 'id="run"' in html
+        assert 'name="viewport"' in html
         with urllib.request.urlopen(f"http://127.0.0.1:{port}/style.css", timeout=3) as resp:
             css = resp.read().decode("utf-8")
         assert "PASS" in css or "--pass" in css or "peer-card" in css
+        assert "prefers-color-scheme" in css
+        assert "focus-visible" in css
+        assert "c9a227" in css.lower()
+        req_json = urllib.request.Request(
+            f"http://127.0.0.1:{port}/",
+            headers={"Accept": "application/json"},
+        )
+        with urllib.request.urlopen(req_json, timeout=3) as resp:
+            machine = json.loads(resp.read().decode("utf-8"))
+        assert machine["name"] == "glossafilter"
+        assert machine["version"]
         with urllib.request.urlopen(f"http://127.0.0.1:{port}/api/peers", timeout=3) as resp:
             payload = json.loads(resp.read().decode("utf-8"))
         ids = [p["peer_id"] for p in payload["peers"]]

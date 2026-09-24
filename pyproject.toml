@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "glossafilter"
 version = "0.1.0"
-description = "Glossa Filter: a deterministic linguistic mediation layer. Peer renders, not a translator. Not concealment."
+description = "Glossa Filter: write one intent into equal peer languages. Local and deterministic."
 readme = "README.md"
 license = {file = "LICENSE"}
 authors = [{name = "Aziel Eliab"}]
