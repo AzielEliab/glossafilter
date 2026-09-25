@@ -1,29 +1,22 @@
 # Glossa Filter — iPhone & Android
 
-Enter a structured intent (subject / rel / object). Renders peer texts for en-plain, en-formal, and es. All peers equal.
+Write one intent and read peer texts for en-plain, en-formal, and es. Author: Aziel Eliab.
 
-Offline. No analytics. Dark matte / gold.
+Application id: `com.azieeliab.glossafilter`. Offline. Light and dark follow the phone.
 
-Application id: `com.azieeliab.glossafilter`
-
-## Open in Android Studio / Xcode
-
-The `android/` and `ios/` folders here are skeleton READMEs because
-this tree was written without the Flutter SDK on PATH.
+## Start
 
 ```bash
 cd mobile
 flutter create --org com.azieeliab --project-name glossafilter .
-flutter pub get
-flutter run
+flutter pub get && flutter run
 ```
 
-Then open `android/` in Android Studio, or `ios/Runner.xcworkspace` in
-Xcode.
+The `android/` and `ios/` folders here are skeleton READMEs until `flutter create .` runs. Then open `android/` in Android Studio, or `ios/Runner.xcworkspace` in Xcode.
 
-## Honest scope
+## Notes
 
-Not concealment, steganography, identity masking, or a live translator. No canonical language.
+Peers stay equal. No primary language. Packs on the phone are the three listed above. The desktop package has the full set.
 
 ## Desktop package (counted download)
 

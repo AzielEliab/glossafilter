@@ -1,0 +1,7 @@
+Glossa Filter
+Author: Aziel Eliab
+
+1. python -m venv .venv && source .venv/bin/activate && pip install -e .
+2. glossafilter
+3. glossafilter ui
+   Open http://127.0.0.1:8792/

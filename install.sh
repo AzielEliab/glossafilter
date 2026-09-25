@@ -26,7 +26,9 @@ python -m pip install -U pip
 python -m pip install -e .
 
 echo
-echo "Installed Glossa Filter."
-echo "Run:  glossafilter ui"
-echo "Then open http://127.0.0.1:8792  (loopback only)"
-echo "Author: Aziel Eliab."
+echo "Installed Glossa Filter in $(pwd)"
+echo "1. cd $(pwd)"
+echo "2. source .venv/bin/activate"
+echo "3. glossafilter ui"
+echo "Open http://127.0.0.1:8792/"
+echo "Author: Aziel Eliab"

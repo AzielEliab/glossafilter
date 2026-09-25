@@ -17,7 +17,9 @@ class GlossaApp extends StatelessWidget {
     return MaterialApp(
       title: 'Glossa Filter',
       debugShowCheckedModeBanner: false,
-      theme: buildAppTheme(),
+      theme: buildAppTheme(brightness: Brightness.light),
+      darkTheme: buildAppTheme(brightness: Brightness.dark),
+      themeMode: ThemeMode.system,
       home: const FilterPage(),
     );
   }
@@ -126,14 +128,15 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
-  final _subject = TextEditingController(text: 'package');
-  final _rel = TextEditingController(text: 'release');
-  final _object = TextEditingController(text: 'filter');
-  final _action = TextEditingController(text: 'binds');
-  final _interface = TextEditingController(text: 'loopback');
+  final _subject = TextEditingController();
+  final _rel = TextEditingController();
+  final _object = TextEditingController();
+  final _action = TextEditingController();
+  final _interface = TextEditingController();
   String _channel = 'tooling';
   Map<String, String>? _peers;
   String? _digest;
+  String? _notice;
 
   @override
   void dispose() {
@@ -146,6 +149,16 @@ class _FilterPageState extends State<FilterPage> {
   }
 
   void _render() {
+    if (_subject.text.trim().isEmpty &&
+        _rel.text.trim().isEmpty &&
+        _object.text.trim().isEmpty) {
+      setState(() {
+        _digest = null;
+        _peers = null;
+        _notice = 'Fill in subject, relation, and object, then render.';
+      });
+      return;
+    }
     final intent = {
       'channel': _channel,
       'propositions': [
@@ -166,12 +179,15 @@ class _FilterPageState extends State<FilterPage> {
           .replaceAll('{subject}', sub)
           .replaceAll('{rel}', rel)
           .replaceAll('{object}', obj);
-      final blurb = pack.blurb.replaceAll('{action}', act).replaceAll('{interface}', iface);
-      out[pack.id] = '$prop\n$blurb';
+      final blurb = (act.trim().isEmpty && iface.trim().isEmpty)
+          ? ''
+          : pack.blurb.replaceAll('{action}', act).replaceAll('{interface}', iface);
+      out[pack.id] = blurb.isEmpty ? prop : '$prop\n$blurb';
     }
     setState(() {
       _digest = digest;
       _peers = out;
+      _notice = null;
     });
   }
 
@@ -182,40 +198,54 @@ class _FilterPageState extends State<FilterPage> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          const Text(
-            'Human opinion remains human, and tools remain tools.',
-            style: TextStyle(color: kGold, fontStyle: FontStyle.italic),
-          ),
+          const Text('Write one intent. Read every peer on this phone.'),
           const SizedBox(height: 8),
-          const Text(
-            'Mediation, not concealment. No canonical language. Peers are equal. '
-            'Not a live translator. Not identity masking.',
-          ),
+          const Text('Human opinion remains human, and tools remain tools.'),
           const SizedBox(height: 16),
-          SegmentedButton<String>(
-            segments: const [
-              ButtonSegment(value: 'tooling', label: Text('tooling')),
-              ButtonSegment(value: 'civic', label: Text('civic')),
-            ],
-            selected: {_channel},
-            onSelectionChanged: (s) => setState(() => _channel = s.first),
-          ),
-          const SizedBox(height: 12),
-          TextField(controller: _subject, decoration: const InputDecoration(labelText: 'subject')),
+          TextField(controller: _subject, decoration: const InputDecoration(labelText: 'Subject', hintText: 'package')),
           const SizedBox(height: 8),
-          TextField(controller: _rel, decoration: const InputDecoration(labelText: 'rel')),
+          TextField(controller: _rel, decoration: const InputDecoration(labelText: 'Relation', hintText: 'release')),
           const SizedBox(height: 8),
-          TextField(controller: _object, decoration: const InputDecoration(labelText: 'object')),
-          const SizedBox(height: 8),
-          TextField(controller: _action, decoration: const InputDecoration(labelText: 'slot: action')),
-          const SizedBox(height: 8),
-          TextField(controller: _interface, decoration: const InputDecoration(labelText: 'slot: interface')),
+          TextField(controller: _object, decoration: const InputDecoration(labelText: 'Object', hintText: 'filter')),
           const SizedBox(height: 12),
           FilledButton(onPressed: _render, child: const Text('Render peers')),
+          const SizedBox(height: 8),
+          ExpansionTile(
+            title: const Text('Advanced'),
+            children: [
+              SegmentedButton<String>(
+                segments: const [
+                  ButtonSegment(value: 'tooling', label: Text('Tooling')),
+                  ButtonSegment(value: 'civic', label: Text('Civic')),
+                ],
+                selected: {_channel},
+                onSelectionChanged: (s) => setState(() => _channel = s.first),
+              ),
+              const SizedBox(height: 8),
+              TextField(controller: _action, decoration: const InputDecoration(labelText: 'Action', hintText: 'binds')),
+              const SizedBox(height: 8),
+              TextField(controller: _interface, decoration: const InputDecoration(labelText: 'Interface', hintText: 'loopback')),
+              const SizedBox(height: 8),
+            ],
+          ),
+          const ExpansionTile(
+            title: Text('About'),
+            children: [
+              ListTile(
+                title: Text(
+                  'No primary language. Peers on this phone are English (plain), English (formal), and Español. Author: Aziel Eliab.',
+                ),
+              ),
+            ],
+          ),
+          if (_notice != null) ...[
+            const SizedBox(height: 8),
+            Text(_notice!),
+          ],
           if (_digest != null) ...[
             const SizedBox(height: 8),
-            Text('intent digest ${_digest!.substring(0, 16)}…  (content-derived, not author-derived)',
-                style: const TextStyle(fontFamily: 'monospace', fontSize: 12, color: kGoldDim)),
+            Text('digest ${_digest!}',
+                style: const TextStyle(fontFamily: 'monospace', fontSize: 12)),
             const SizedBox(height: 12),
             for (final pack in packs)
               Card(
@@ -225,7 +255,7 @@ class _FilterPageState extends State<FilterPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('${pack.id}  ·  ${pack.label}  ·  peer (not primary)',
+                      Text('${pack.label}  ·  ${pack.id}',
                           style: const TextStyle(color: kGold)),
                       const SizedBox(height: 6),
                       Text(_peers![pack.id] ?? ''),

@@ -54,9 +54,19 @@ class Handler(BaseHTTPRequestHandler):
         body = json.dumps(obj, indent=2, ensure_ascii=False).encode("utf-8")
         self._send(status, body, "application/json; charset=utf-8")
 
+    def _prefers_json(self) -> bool:
+        accept = self.headers.get("Accept") or ""
+        if not accept:
+            return False
+        first = accept.split(",")[0].strip().lower()
+        return first.startswith("application/json")
+
     def do_GET(self) -> None:  # noqa: N802
         path = urlparse(self.path).path
         if path in {"/", "/index.html"}:
+            if self._prefers_json():
+                self._json(200, {"name": "glossafilter", "version": __version__})
+                return
             self._send(200, _web_bytes("index.html"), MIME[".html"])
             return
         if path == "/style.css":
@@ -115,10 +125,12 @@ def make_server(host: str = "127.0.0.1", port: int = 8792) -> ThreadingHTTPServe
 def serve(host: str = "127.0.0.1", port: int = 8792) -> None:
     httpd = make_server(host, port)
     bound_host, bound_port = httpd.server_address[:2]
-    print(
-        f"Glossa Filter UI http://{bound_host}:{bound_port} "
-        "(loopback only; mediation, not a translator)"
-    )
+    if bound_host in {"127.0.0.1", "localhost"}:
+        print(f"Open http://127.0.0.1:{bound_port}/")
+    elif bound_host == "::1":
+        print(f"Open http://[::1]:{bound_port}/")
+    else:
+        print(f"Open http://{bound_host}:{bound_port}/")
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

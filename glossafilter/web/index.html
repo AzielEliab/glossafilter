@@ -3,110 +3,127 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Glossa Filter — linguistic mediation</title>
+  <title>Glossa Filter</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <header>
-    <div class="tag">Glossa Filter · v0.1.0 · loopback · mediation, not secrecy</div>
-    <h1>Glossa Filter</h1>
-    <p class="motto">Human opinion remains human, and tools remain tools.</p>
-    <p class="lede">
-      Deterministic linguistic mediation. Same intent, many peer surfaces.
-      No primary language. No live translator. No network. Authorship is not
-      stamped onto the renders.
-    </p>
+  <header class="top">
+    <div>
+      <p class="product">Glossa Filter</p>
+      <h1>Write one intent. Read every peer.</h1>
+    </div>
+    <p class="by">Aziel Eliab</p>
   </header>
 
+  <p class="motto">Human opinion remains human, and tools remain tools.</p>
+
   <form id="intent-form" autocomplete="off">
-    <fieldset>
-      <legend>Intent</legend>
-
-      <label for="channel">
-        <span class="kicker">Channel</span>
-        tooling = behavior and interface only. civic may carry ethical intent.
-        Mixing philosophy into tooling is a failure, not a render.
-      </label>
+    <div class="field">
+      <label for="channel">Channel</label>
       <select id="channel" name="channel">
-        <option value="tooling" selected>tooling</option>
-        <option value="civic">civic</option>
+        <option value="tooling" selected>Tooling — behavior and interface</option>
+        <option value="civic">Civic — ethical intent is allowed</option>
       </select>
+    </div>
 
-      <label for="subject">
-        <span class="kicker">Proposition</span>
-        Structured triple. English is not the source; this record is.
-      </label>
-      <div class="triple">
-        <input id="subject" name="subject" type="text" placeholder="package" spellcheck="false">
-        <input id="rel" name="rel" type="text" placeholder="release" spellcheck="false">
-        <input id="object" name="object" type="text" placeholder="filter" spellcheck="false">
+    <div class="triple">
+      <div class="field">
+        <label for="subject">Subject</label>
+        <input id="subject" name="subject" type="text" placeholder="package" spellcheck="false" autocomplete="off">
       </div>
-      <div class="triple-labels">
-        <span>subject</span><span>rel</span><span>object</span>
+      <div class="field">
+        <label for="rel">Relation</label>
+        <input id="rel" name="rel" type="text" placeholder="release" spellcheck="false" autocomplete="off">
       </div>
-
-      <label for="extra">
-        <span class="kicker">Extra propositions</span>
-        Optional. One per line as subject | rel | object.
-      </label>
-      <textarea id="extra" name="extra" rows="2" placeholder="tool | binds | loopback"></textarea>
-
-      <div class="pair">
-        <div>
-          <label for="action">
-            <span class="kicker">Action</span>
-            Optional slot.
-          </label>
-          <input id="action" name="action" type="text" placeholder="binds">
-        </div>
-        <div>
-          <label for="interface">
-            <span class="kicker">Interface</span>
-            Optional slot.
-          </label>
-          <input id="interface" name="interface" type="text" placeholder="loopback">
-        </div>
+      <div class="field">
+        <label for="object">Object</label>
+        <input id="object" name="object" type="text" placeholder="filter" spellcheck="false" autocomplete="off">
       </div>
-
-      <label for="notes">
-        <span class="kicker">Notes (civic only)</span>
-        Rejected on channel=tooling.
-      </label>
-      <textarea id="notes" name="notes" rows="2" placeholder="Civic notes. Not an author stamp." disabled></textarea>
-    </fieldset>
-
-    <fieldset>
-      <legend>Peers</legend>
-      <p class="hint">All selected by default. None is primary. None is canonical.</p>
-      <div id="peer-boxes" class="peers"></div>
-    </fieldset>
+    </div>
 
     <div class="actions">
-      <button type="submit" id="run">Render peers</button>
-      <label>Import JSON <input type="file" id="import-json" accept="application/json,.json"></label>
-      <button type="button" id="export" disabled>Export JSON</button>
+      <button type="submit" id="run" class="primary">Render peers</button>
     </div>
+
+    <details class="panel" id="advanced">
+      <summary>Advanced</summary>
+
+      <div class="field">
+        <label for="extra">More propositions</label>
+        <textarea id="extra" name="extra" rows="2" placeholder="tool | binds | loopback" spellcheck="false"></textarea>
+        <p class="hint">One per line: subject | relation | object.</p>
+      </div>
+
+      <div class="slots">
+        <div class="field">
+          <label for="who">Who</label>
+          <input id="who" name="who" type="text" spellcheck="false" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="what">What</label>
+          <input id="what" name="what" type="text" spellcheck="false" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="when">When</label>
+          <input id="when" name="when" type="text" spellcheck="false" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="action">Action</label>
+          <input id="action" name="action" type="text" placeholder="binds" spellcheck="false" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="constraint">Constraint</label>
+          <input id="constraint" name="constraint" type="text" spellcheck="false" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="interface">Interface</label>
+          <input id="interface" name="interface" type="text" placeholder="loopback" spellcheck="false" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="notes">Notes</label>
+        <textarea id="notes" name="notes" rows="2" placeholder="Civic notes stay on the civic channel." disabled></textarea>
+        <p class="hint">Available on the civic channel.</p>
+      </div>
+
+      <div class="field">
+        <p class="label-line" id="peers-label">Peers</p>
+        <p class="hint">All peers start selected. They stay equal.</p>
+        <div id="peer-boxes" class="peers" role="group" aria-labelledby="peers-label"></div>
+      </div>
+
+      <div class="actions secondary">
+        <label class="file" for="import-json">Import JSON
+          <input type="file" id="import-json" accept="application/json,.json">
+        </label>
+        <button type="button" id="export" class="ghost" disabled>Export JSON</button>
+      </div>
+    </details>
   </form>
 
   <section class="outputs" aria-live="polite">
-    <h2>Peer surfaces</h2>
-    <p class="hint">Equal vertical stack. No original column.</p>
+    <h2>Peers</h2>
+    <p id="status" class="hint" role="status">Fill in subject, relation, and object, then render.</p>
     <div id="peer-stack"></div>
+    <p id="digest-line" class="digest" hidden></p>
   </section>
 
-  <aside class="ethics">
-    <h2>Ethical boundaries</h2>
+  <details class="panel about">
+    <summary>About</summary>
+    <p>No primary language. None is primary. None is canonical. Each peer is a full render of the same intent.</p>
+    <p class="motto">Human opinion remains human, and tools remain tools.</p>
     <ul>
-      <li>No deception: content remains accurate.</li>
-      <li>No incitement: outputs are non-mobilizing.</li>
-      <li>No identity masking for wrongdoing.</li>
-      <li>Clear separation between civic speech and tooling.</li>
+      <li>Content stays accurate.</li>
+      <li>Outputs stay non-mobilizing.</li>
+      <li>Civic speech and tooling stay separate.</li>
+      <li>This page stays on this computer. Renders use the local packs.</li>
     </ul>
-  </aside>
+    <p>Author: Aziel Eliab. Apache-2.0.</p>
+  </details>
 
   <footer>
-    <p>Apache-2.0 · Aziel Eliab · 2026 · Bound to 127.0.0.1 · Forks welcome and always allowed.</p>
-    <p class="foot-note">This UI mediates. It does not translate live, conceal, or stamp authorship.</p>
+    <p>Aziel Eliab · Apache-2.0 · This computer only</p>
   </footer>
   <script src="/app.js"></script>
 </body>

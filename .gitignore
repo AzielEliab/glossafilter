@@ -1,5 +1,6 @@
 .venv
 __pycache__/
+.glossafilter-state.json
 *.pyc
 dist/
 *.egg-info/
